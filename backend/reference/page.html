@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Godot Asset Library</title>
+
+    <!-- Bootstrap -->
+    <link href="/asset-library/assets/css/bootstrap-3.4.1.min.css" rel="stylesheet">
+    <link href="/asset-library/assets/css/base.css?7" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand logo-light" href="https://godotengine.org" style="padding: 7px;"><img alt="Godot" src="/asset-library/assets/logo.svg" height="100%" style="display: inline"> </a>
+                <a class="navbar-brand logo-dark" href="https://godotengine.org" style="padding: 7px;"><img alt="Godot" src="/asset-library/assets/logo_dark.svg" height="100%" style="display: inline"> </a>
+                <a class="navbar-brand" href="/asset-library" style="padding: 14px;">| Asset Library</a>
+            </div>
+
+            
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-left">
+                                    <li class="active">
+                    <a href="/asset-library/asset">Assets</a>
+                </li>
+                            </ul>
+                <ul class="nav navbar-nav navbar-right">
+                                                            <li >
+                    <a href="/asset-library/login">Login/Register</a>
+                </li>
+                                                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+    </header>
+    <main class="container">
+
+<div class="asset-search-container">
+    <form method="get" action="asset">
+        <div class="input-group">
+            <input type="text" class="form-control" name="filter" placeholder="Search for..." aria-label="Search for assets" value="">
+            <span class="input-group-btn">
+                <button class="btn btn-primary" type="submit">Search</button>
+            </span>
+        </div>
+
+        <div class="form-inline form-search">
+            <div class="form-group">
+                <label for="category">Category</label>
+                <select id="category" name="category" class="form-control">
+                    <option value="">
+                        Any
+                    </option>
+
+                                            <option value="1" >
+                            2D Tools                        </option>
+                                            <option value="2" >
+                            3D Tools                        </option>
+                                            <option value="3" >
+                            Shaders                        </option>
+                                            <option value="4" >
+                            Materials                        </option>
+                                            <option value="5" >
+                            Tools                        </option>
+                                            <option value="6" >
+                            Scripts                        </option>
+                                            <option value="7" >
+                            Misc                        </option>
+                                            <option value="8" >
+                            Templates                        </option>
+                                            <option value="9" >
+                            Projects                        </option>
+                                            <option value="10" >
+                            Demos                        </option>
+                                    </select>
+            </div>
+            <div class="form-group">
+                <label>Support level</label>
+                                    <label class="form-checkbox">
+                        <input type="checkbox" name="support[testing]" value="1"
+                            >
+                        Testing                    </label>
+                                    <label class="form-checkbox">
+                        <input type="checkbox" name="support[community]" value="1"
+                            >
+                        Community                    </label>
+                                    <label class="form-checkbox">
+                        <input type="checkbox" name="support[featured]" value="1"
+                            >
+                        Featured                    </label>
+                            </div>
+            <div class="form-group">
+                <label for="godot_version">Godot version</label>
+                <select id="godot_version" name="godot_version" class="form-control">
+                    <option value="">
+                        Any
+                    </option>
+
+                                            <option value="2.0" >
+                            2.0                        </option>
+                                            <option value="2.1" >
+                            2.1                        </option>
+                                            <option value="2.2" >
+                            2.2                        </option>
+                                            <option value="3.0" >
+                            3.0                        </option>
+                                            <option value="3.1" >
+                            3.1                        </option>
+                                            <option value="3.2" >
+                            3.2                        </option>
+                                            <option value="3.3" >
+                            3.3                        </option>
+                                            <option value="3.4" >
+                            3.4                        </option>
+                                            <option value="3.5" >
+                            3.5                        </option>
+                                            <option value="3.6" >
+                            3.6                        </option>
+                                            <option value="4.0" >
+                            4.0                        </option>
+                                            <option value="4.1" >
+                            4.1                        </option>
+                                            <option value="4.2" >
+                            4.2                        </option>
+                                            <option value="4.3" >
+                            4.3                        </option>
+                                            <option value="4.4" >
+                            4.4                        </option>
+                                            <option value="4.5" >
+                            4.5                        </option>
+                                            <option value="unknown" >
+                            Unknown                        </option>
+                                            <option value="custom_build" >
+                            Custom build                        </option>
+                                    </select>
+            </div>
+            <div class="form-group">
+                <label for="license">License</label>
+                <select id="license" name="cost" class="form-control">
+                    <option value="">
+                        Any
+                    </option>
+
+                                            <option value="MIT" >
+                            MIT                        </option>
+                                            <option value="MPL-2.0" >
+                            MPL-2.0                        </option>
+                                            <option value="GPLv3" >
+                            GPL v3                        </option>
+                                            <option value="GPLv2" >
+                            GPL v2                        </option>
+                                            <option value="LGPLv3" >
+                            LGPL v3                        </option>
+                                            <option value="LGPLv2.1" >
+                            LGPL v2.1                        </option>
+                                            <option value="LGPLv2" >
+                            LGPL v2                        </option>
+                                            <option value="AGPLv3" >
+                            AGPL v3                        </option>
+                                            <option value="EUPL-1.2" >
+                            European Union Public License 1.2                        </option>
+                                            <option value="Apache-2.0" >
+                            Apache 2.0                        </option>
+                                            <option value="CC0" >
+                            CC0 1.0 Universal                        </option>
+                                            <option value="CC-BY-4.0" >
+                            CC BY 4.0 International                        </option>
+                                            <option value="CC-BY-3.0" >
+                            CC BY 3.0 Unported                        </option>
+                                            <option value="CC-BY-SA-4.0" >
+                            CC BY-SA 4.0 International                        </option>
+                                            <option value="CC-BY-SA-3.0" >
+                            CC BY-SA 3.0 Unported                        </option>
+                                            <option value="BSD-2-Clause" >
+                            BSD 2-clause License                        </option>
+                                            <option value="BSD-3-Clause" >
+                            BSD 3-clause License                        </option>
+                                            <option value="BSL-1.0" >
+                            Boost Software License                        </option>
+                                            <option value="ISC" >
+                            ISC License                        </option>
+                                            <option value="Unlicense" >
+                            The Unlicense License                        </option>
+                                            <option value="Proprietary" >
+                            Proprietary (see LICENSE file)                        </option>
+                                    </select>
+            </div>
+            <div class="form-group">
+                <label for="sort">Order by</label>
+                <select id="sort" name="sort" class="form-control">
+                                            <option value="cost" >
+                            License                        </option>
+                                            <option value="name" >
+                            Name                        </option>
+                                            <option value="updated" selected="">
+                            Updated                        </option>
+                                    </select>
+                <label class="form-checkbox">
+                    <input type="checkbox" name="reverse" >
+                    Reverse
+                </label>
+            </div>
+
+                    </div>
+
+            </form>
+
+    <div class="asset-search-results">
+        <ol class="asset-list">
+                            <li class="asset-item">
+                    <a href="/asset-library/asset/4560" class="asset-header">
+                        <img class="media-object" src="https://raw.githubusercontent.com/IbrahimTahirGameDev/Itqan-AI-Godot/716ee0a520fd71a66e21753ef34565c62bc76e65/icon.png" alt="Itqan AI - Smart Godot Assistant's icon" width=80 height=80>
+                        <div class="asset-title">
+                            <h4>Itqan AI - Smart Godot Assistant</h4>
+                            <div class="asset-tags-container">
+                                <div class="asset-tags">
+                                    <span class="label label-primary">Tools</span>
+                                    <span class="label label-info">4.0</span>
+                                    <span class="label label-success">Community</span>
+                                </div>
+                                <div class="asset-tags">
+                                    <span class="label label-default">MIT</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="asset-footer">
+                        <a href="?user=IbrahimTahirGameDev" title="Search assets by 'IbrahimTahirGameDev'">IbrahimTahirGameDev</a>
+                        <span><b>v1.0</b> | 2025-12-11</span>
+                    </div>
+                </li>
+                            <li class="asset-item">
+                    <a href="/asset-library/asset/4530" class="asset-header">
+                        <img class="media-object" src="https://i.imgur.com/NImS2CX.jpeg" alt="Toast - ProperUI's icon" width=80 height=80>
+                        <div class="asset-title">
+                            <h4>Toast - ProperUI</h4>
+                            <div class="asset-tags-container">
+                                <div class="asset-tags">
+                                    <span class="label label-primary">Tools</span>
+                                    <span class="label label-info">4.5</span>
+                                    <span class="label label-success">Community</span>
+                                </div>
+                                <div class="asset-tags">
+                                    <span class="label label-default">MIT</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="asset-footer">
+                        <a href="?user=teleoflexuous" title="Search assets by 'teleoflexuous'">teleoflexuous</a>
+                        <span><b>1.0.2</b> | 2025-12-11</span>
+                    </div>
+                </li>
+                            <li class="asset-item">
+                    <a href="/asset-library/asset/4553" class="asset-header">
+                        <img class="media-object" src="https://i.imgur.com/rN80H2d.png" alt="Modal - ProperUI's icon" width=80 height=80>
+                        <div class="asset-title">
+                            <h4>Modal - ProperUI</h4>
+                            <div class="asset-tags-container">
+                                <div class="asset-tags">
+                                    <span class="label label-primary">Tools</span>
+                                    <span class="label label-info">4.5</span>
+                                    <span class="label label-success">Community</span>
+                                </div>
+                                <div class="asset-tags">
+                                    <span class="label label-default">MIT</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="asset-footer">
+                        <a href="?user=teleoflexuous" title="Search assets by 'teleoflexuous'">teleoflexuous</a>
+                        <span><b>1.0.0</b> | 2025-12-11</span>
+                    </div>
+                </li>
+                            <li class="asset-item">
+                    <a href="/asset-library/asset/4538" class="asset-header">
+                        <img class="media-object" src="https://raw.githubusercontent.com/EmberNoGlow/Merging-Meshes-Godot/refs/heads/main/addons/mergingmeshes/Icon.png" alt="Merging Meshes Godot's icon" width=80 height=80>
+                        <div class="asset-title">
+                            <h4>Merging Meshes Godot</h4>
+                            <div class="asset-tags-container">
+                                <div class="asset-tags">
+                                    <span class="label label-primary">3D Tools</span>
+                                    <span class="label label-info">4.4</span>
+                                    <span class="label label-success">Community</span>
+                                </div>
+                                <div class="asset-tags">
+                                    <span class="label label-default">CC0</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="asset-footer">
+                        <a href="?user=EmberNoGlow" title="Search assets by 'EmberNoGlow'">EmberNoGlow</a>
+                        <span><b>1.0</b> | 2025-12-11</span>
+                    </div>
+                </li>
+                            <li class="asset-item">
+                    <a href="/asset-library/asset/4347" class="asset-header">
+                        <img class="media-object" src="https://raw.githubusercontent.com/3ddelano/discord.gd/refs/heads/main/discord_gd_icon.jpg" alt="Discord.gd (Godot 4.x)'s icon" width=80 height=80>
+                        <div class="asset-title">
+                            <h4>Discord.gd (Godot 4.x)</h4>
+                            <div class="asset-tags-container">
+                                <div class="asset-tags">
+                                    <span class="label label-primary">Scripts</span>
+                                    <span class="label label-info">4.0</span>
+                                    <span class="label label-success">Community</span>
+                                </div>
+                                <div class="asset-tags">
+                                    <span class="label label-default">MIT</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="asset-footer">
+                        <a href="?user=3ddelano" title="Search assets by '3ddelano'">3ddelano</a>
+                        <span><b>2.0.3</b> | 2025-12-11</span>
+                    </div>
+                </li>
+                            <li class="asset-item">
+                    <a href="/asset-library/asset/4559" class="asset-header">
+                        <img class="media-object" src="https://amcaricola.com/simple_fetch_tool/simple_fetch_tool.png" alt="Simple Fetch Tool's icon" width=80 height=80>
+                        <div class="asset-title">
+                            <h4>Simple Fetch Tool</h4>
+                            <div class="asset-tags-container">
+                                <div class="asset-tags">
+                                    <span class="label label-primary">Tools</span>
+                                    <span class="label label-info">4.5</span>
+                                    <span class="label label-success">Community</span>
+                                </div>
+                                <div class="asset-tags">
+                                    <span class="label label-default">MIT</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="asset-footer">
+                        <a href="?user=amcaricola" title="Search assets by 'amcaricola'">amcaricola</a>
+                        <span><b>1.0</b> | 2025-12-11</span>
+                    </div>
+                </li>
+                            <li class="asset-item">
+                    <a href="/asset-library/asset/4549" class="asset-header">
+                        <img class="media-object" src="https://raw.githubusercontent.com/Emarald64/itch-uploader/refs/heads/main/icon.png" alt="Itch.io Uploader's icon" width=80 height=80>
+                        <div class="asset-title">
+                            <h4>Itch.io Uploader</h4>
+                            <div class="asset-tags-container">
+                                <div class="asset-tags">
+                                    <span class="label label-primary">Tools</span>
+                                    <span class="label label-info">4.4</span>
+                                    <span class="label label-success">Community</span>
+                                </div>
+                                <div class="asset-tags">
+                                    <span class="label label-default">MIT</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="asset-footer">
+                        <a href="?user=Xanderath" title="Search assets by 'Xanderath'">Xanderath</a>
+                        <span><b>1.0</b> | 2025-12-11</span>
+                    </div>
+                </li>
+                            <li class="asset-item">
+                    <a href="/asset-library/asset/4557" class="asset-header">
+                        <img class="media-object" src="https://raw.githubusercontent.com/snotbane/psx_visuals/refs/heads/main/textures/icon.png" alt="PS1 Visuals's icon" width=80 height=80>
+                        <div class="asset-title">
+                            <h4>PS1 Visuals</h4>
+                            <div class="asset-tags-container">
+                                <div class="asset-tags">
+                                    <span class="label label-primary">Shaders</span>
+                                    <span class="label label-info">4.0</span>
+                                    <span class="label label-success">Community</span>
+                                </div>
+                                <div class="asset-tags">
+                                    <span class="label label-default">Unlicense</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="asset-footer">
+                        <a href="?user=snotbane" title="Search assets by 'snotbane'">snotbane</a>
+                        <span><b>1.0</b> | 2025-12-11</span>
+                    </div>
+                </li>
+                            <li class="asset-item">
+                    <a href="/asset-library/asset/4212" class="asset-header">
+                        <img class="media-object" src="https://raw.githubusercontent.com/Muniz1994/GDIFCpub/refs/heads/master/images/GDIFC.png" alt="GDIFC's icon" width=80 height=80>
+                        <div class="asset-title">
+                            <h4>GDIFC</h4>
+                            <div class="asset-tags-container">
+                                <div class="asset-tags">
+                                    <span class="label label-primary">Tools</span>
+                                    <span class="label label-info">4.2</span>
+                                    <span class="label label-success">Community</span>
+                                </div>
+                                <div class="asset-tags">
+                                    <span class="label label-default">MPL-2.0</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="asset-footer">
+                        <a href="?user=bmuniz1994" title="Search assets by 'bmuniz1994'">bmuniz1994</a>
+                        <span><b>0.0.3</b> | 2025-12-11</span>
+                    </div>
+                </li>
+                            <li class="asset-item">
+                    <a href="/asset-library/asset/3392" class="asset-header">
+                        <img class="media-object" src="https://i.imgur.com/Y4a2Fb9.png" alt="Gizmo3D's icon" width=80 height=80>
+                        <div class="asset-title">
+                            <h4>Gizmo3D</h4>
+                            <div class="asset-tags-container">
+                                <div class="asset-tags">
+                                    <span class="label label-primary">3D Tools</span>
+                                    <span class="label label-info">4.5</span>
+                                    <span class="label label-success">Community</span>
+                                </div>
+                                <div class="asset-tags">
+                                    <span class="label label-default">MIT</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="asset-footer">
+                        <a href="?user=chrisizeful" title="Search assets by 'chrisizeful'">chrisizeful</a>
+                        <span><b>1.0.0</b> | 2025-12-10</span>
+                    </div>
+                </li>
+                            <li class="asset-item">
+                    <a href="/asset-library/asset/2896" class="asset-header">
+                        <img class="media-object" src="https://raw.githubusercontent.com/Maaack/Godot-Scene-Loader/refs/heads/main/addons/maaacks_scene_loader/assets/plugin_logo/logo.png" alt="Maaack's Scene Loader's icon" width=80 height=80>
+                        <div class="asset-title">
+                            <h4>Maaack's Scene Loader</h4>
+                            <div class="asset-tags-container">
+                                <div class="asset-tags">
+                                    <span class="label label-primary">Scripts</span>
+                                    <span class="label label-info">4.3</span>
+                                    <span class="label label-success">Community</span>
+                                </div>
+                                <div class="asset-tags">
+                                    <span class="label label-default">MIT</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="asset-footer">
+                        <a href="?user=Maaack" title="Search assets by 'Maaack'">Maaack</a>
+                        <span><b>1.4.1</b> | 2025-12-10</span>
+                    </div>
+                </li>
+                            <li class="asset-item">
+                    <a href="/asset-library/asset/3058" class="asset-header">
+                        <img class="media-object" src="https://raw.githubusercontent.com/Maaack/Godot-Options-Menus/main/addons/maaacks_options_menus/assets/plugin_logo/logo.png" alt="Maaack's Options Menus's icon" width=80 height=80>
+                        <div class="asset-title">
+                            <h4>Maaack's Options Menus</h4>
+                            <div class="asset-tags-container">
+                                <div class="asset-tags">
+                                    <span class="label label-primary">Scripts</span>
+                                    <span class="label label-info">4.3</span>
+                                    <span class="label label-success">Community</span>
+                                </div>
+                                <div class="asset-tags">
+                                    <span class="label label-default">MIT</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="asset-footer">
+                        <a href="?user=Maaack" title="Search assets by 'Maaack'">Maaack</a>
+                        <span><b>1.4.1</b> | 2025-12-10</span>
+                    </div>
+                </li>
+                            <li class="asset-item">
+                    <a href="/asset-library/asset/2899" class="asset-header">
+                        <img class="media-object" src="https://raw.githubusercontent.com/Maaack/Godot-Menus-Template/main/addons/maaacks_menus_template/assets/plugin_logo/logo.png" alt="Maaack's Menus Template - Plugin's icon" width=80 height=80>
+                        <div class="asset-title">
+                            <h4>Maaack's Menus Template - Plugin</h4>
+                            <div class="asset-tags-container">
+                                <div class="asset-tags">
+                                    <span class="label label-primary">Scripts</span>
+                                    <span class="label label-info">4.3</span>
+                                    <span class="label label-success">Community</span>
+                                </div>
+                                <div class="asset-tags">
+                                    <span class="label label-default">MIT</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="asset-footer">
+                        <a href="?user=Maaack" title="Search assets by 'Maaack'">Maaack</a>
+                        <span><b>1.4.1</b> | 2025-12-10</span>
+                    </div>
+                </li>
+                            <li class="asset-item">
+                    <a href="/asset-library/asset/3790" class="asset-header">
+                        <img class="media-object" src="https://raw.githubusercontent.com/Maaack/Godot-Menus-Template/main/addons/maaacks_menus_template/assets/plugin_logo/logo.png" alt="Maaack's Menus Template's icon" width=80 height=80>
+                        <div class="asset-title">
+                            <h4>Maaack's Menus Template</h4>
+                            <div class="asset-tags-container">
+                                <div class="asset-tags">
+                                    <span class="label label-primary">Templates</span>
+                                    <span class="label label-info">4.3</span>
+                                    <span class="label label-success">Community</span>
+                                </div>
+                                <div class="asset-tags">
+                                    <span class="label label-default">MIT</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="asset-footer">
+                        <a href="?user=Maaack" title="Search assets by 'Maaack'">Maaack</a>
+                        <span><b>1.4.1</b> | 2025-12-10</span>
+                    </div>
+                </li>
+                            <li class="asset-item">
+                    <a href="/asset-library/asset/2948" class="asset-header">
+                        <img class="media-object" src="https://raw.githubusercontent.com/Maaack/Godot-Game-Template/main/addons/maaacks_game_template/media/gwj-icon-black-transparent-256x256.png" alt="Maaack's GWJ Template - Plugin's icon" width=80 height=80>
+                        <div class="asset-title">
+                            <h4>Maaack's GWJ Template - Plugin</h4>
+                            <div class="asset-tags-container">
+                                <div class="asset-tags">
+                                    <span class="label label-primary">Scripts</span>
+                                    <span class="label label-info">4.3</span>
+                                    <span class="label label-success">Community</span>
+                                </div>
+                                <div class="asset-tags">
+                                    <span class="label label-default">MIT</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="asset-footer">
+                        <a href="?user=Maaack" title="Search assets by 'Maaack'">Maaack</a>
+                        <span><b>1.4.1</b> | 2025-12-10</span>
+                    </div>
+                </li>
+                            <li class="asset-item">
+                    <a href="/asset-library/asset/2709" class="asset-header">
+                        <img class="media-object" src="https://raw.githubusercontent.com/Maaack/Godot-Game-Template/main/addons/maaacks_game_template/assets/plugin_logo/logo.png" alt="Maaack's Game Template - Plugin's icon" width=80 height=80>
+                        <div class="asset-title">
+                            <h4>Maaack's Game Template - Plugin</h4>
+                            <div class="asset-tags-container">
+                                <div class="asset-tags">
+                                    <span class="label label-primary">Scripts</span>
+                                    <span class="label label-info">4.3</span>
+                                    <span class="label label-success">Community</span>
+                                </div>
+                                <div class="asset-tags">
+                                    <span class="label label-default">MIT</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="asset-footer">
+                        <a href="?user=Maaack" title="Search assets by 'Maaack'">Maaack</a>
+                        <span><b>1.4.1</b> | 2025-12-10</span>
+                    </div>
+                </li>
+                            <li class="asset-item">
+                    <a href="/asset-library/asset/2703" class="asset-header">
+                        <img class="media-object" src="https://raw.githubusercontent.com/Maaack/Godot-Game-Template/main/addons/maaacks_game_template/assets/plugin_logo/logo.png" alt="Maaack's Game Template's icon" width=80 height=80>
+                        <div class="asset-title">
+                            <h4>Maaack's Game Template</h4>
+                            <div class="asset-tags-container">
+                                <div class="asset-tags">
+                                    <span class="label label-primary">Templates</span>
+                                    <span class="label label-info">4.3</span>
+                                    <span class="label label-success">Community</span>
+                                </div>
+                                <div class="asset-tags">
+                                    <span class="label label-default">MIT</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="asset-footer">
+                        <a href="?user=Maaack" title="Search assets by 'Maaack'">Maaack</a>
+                        <span><b>1.4.1</b> | 2025-12-10</span>
+                    </div>
+                </li>
+                            <li class="asset-item">
+                    <a href="/asset-library/asset/4558" class="asset-header">
+                        <img class="media-object" src="https://raw.githubusercontent.com/DexterFstone/godot-view-panner/refs/heads/main/icon.png" alt="ViewPanner's icon" width=80 height=80>
+                        <div class="asset-title">
+                            <h4>ViewPanner</h4>
+                            <div class="asset-tags-container">
+                                <div class="asset-tags">
+                                    <span class="label label-primary">Scripts</span>
+                                    <span class="label label-info">4.0</span>
+                                    <span class="label label-success">Community</span>
+                                </div>
+                                <div class="asset-tags">
+                                    <span class="label label-default">MIT</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="asset-footer">
+                        <a href="?user=Dexter" title="Search assets by 'Dexter'">Dexter</a>
+                        <span><b>1.0</b> | 2025-12-10</span>
+                    </div>
+                </li>
+                            <li class="asset-item">
+                    <a href="/asset-library/asset/1667" class="asset-header">
+                        <img class="media-object" src="https://arlez80.bitbucket.io/godot/icons/godot-midi-player/gmp4.png" alt="Godot MIDI Player for Godot Engine 4's icon" width=80 height=80>
+                        <div class="asset-title">
+                            <h4>Godot MIDI Player for Godot Engine 4</h4>
+                            <div class="asset-tags-container">
+                                <div class="asset-tags">
+                                    <span class="label label-primary">Scripts</span>
+                                    <span class="label label-info">4.3</span>
+                                    <span class="label label-success">Community</span>
+                                </div>
+                                <div class="asset-tags">
+                                    <span class="label label-default">MIT</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="asset-footer">
+                        <a href="?user=arlez80" title="Search assets by 'arlez80'">arlez80</a>
+                        <span><b>4.5.0</b> | 2025-12-10</span>
+                    </div>
+                </li>
+                            <li class="asset-item">
+                    <a href="/asset-library/asset/240" class="asset-header">
+                        <img class="media-object" src="https://arlez80.bitbucket.io/godot/icons/godot-midi-player/gmp3.png" alt="Godot MIDI Player's icon" width=80 height=80>
+                        <div class="asset-title">
+                            <h4>Godot MIDI Player</h4>
+                            <div class="asset-tags-container">
+                                <div class="asset-tags">
+                                    <span class="label label-primary">Scripts</span>
+                                    <span class="label label-info">3.5</span>
+                                    <span class="label label-success">Community</span>
+                                </div>
+                                <div class="asset-tags">
+                                    <span class="label label-default">MIT</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="asset-footer">
+                        <a href="?user=arlez80" title="Search assets by 'arlez80'">arlez80</a>
+                        <span><b>2.7.0</b> | 2025-12-10</span>
+                    </div>
+                </li>
+                            <li class="asset-item">
+                    <a href="/asset-library/asset/4496" class="asset-header">
+                        <img class="media-object" src="https://raw.githubusercontent.com/phosxd/Any-JSON/refs/heads/main/git_assets/icon.png" alt="Any-JSON (object serialization)'s icon" width=80 height=80>
+                        <div class="asset-title">
+                            <h4>Any-JSON (object serialization)</h4>
+                            <div class="asset-tags-container">
+                                <div class="asset-tags">
+                                    <span class="label label-primary">Tools</span>
+                                    <span class="label label-info">4.4</span>
+                                    <span class="label label-success">Community</span>
+                                </div>
+                                <div class="asset-tags">
+                                    <span class="label label-default">MIT</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="asset-footer">
+                        <a href="?user=PhosXD" title="Search assets by 'PhosXD'">PhosXD</a>
+                        <span><b>1.3.0</b> | 2025-12-10</span>
+                    </div>
+                </li>
+                            <li class="asset-item">
+                    <a href="/asset-library/asset/3901" class="asset-header">
+                        <img class="media-object" src="https://codeberg.org/godotsteam/godotsteam-docs/raw/branch/master/docs/assets/images/godotsteam-steam-icon.png" alt="GodotSteam Server GDExtension 4.4+'s icon" width=80 height=80>
+                        <div class="asset-title">
+                            <h4>GodotSteam Server GDExtension 4.4+</h4>
+                            <div class="asset-tags-container">
+                                <div class="asset-tags">
+                                    <span class="label label-primary">Tools</span>
+                                    <span class="label label-info">4.4</span>
+                                    <span class="label label-success">Community</span>
+                                </div>
+                                <div class="asset-tags">
+                                    <span class="label label-default">MIT</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="asset-footer">
+                        <a href="?user=Gramps" title="Search assets by 'Gramps'">Gramps</a>
+                        <span><b>4.8</b> | 2025-12-10</span>
+                    </div>
+                </li>
+                            <li class="asset-item">
+                    <a href="/asset-library/asset/2445" class="asset-header">
+                        <img class="media-object" src="https://codeberg.org/godotsteam/godotsteam-docs/raw/branch/master/docs/assets/images/godotsteam-steam-icon.png" alt="GodotSteam GDExtension 4.4+'s icon" width=80 height=80>
+                        <div class="asset-title">
+                            <h4>GodotSteam GDExtension 4.4+</h4>
+                            <div class="asset-tags-container">
+                                <div class="asset-tags">
+                                    <span class="label label-primary">Tools</span>
+                                    <span class="label label-info">4.4</span>
+                                    <span class="label label-success">Community</span>
+                                </div>
+                                <div class="asset-tags">
+                                    <span class="label label-default">MIT</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="asset-footer">
+                        <a href="?user=Gramps" title="Search assets by 'Gramps'">Gramps</a>
+                        <span><b>4.17</b> | 2025-12-10</span>
+                    </div>
+                </li>
+                            <li class="asset-item">
+                    <a href="/asset-library/asset/4556" class="asset-header">
+                        <img class="media-object" src="https://raw.githubusercontent.com/ArizoftGames/Open_ami/master/AMI_icon.png" alt="AMI-Accessible Model Interface for Grok's icon" width=80 height=80>
+                        <div class="asset-title">
+                            <h4>AMI-Accessible Model Interface for Grok</h4>
+                            <div class="asset-tags-container">
+                                <div class="asset-tags">
+                                    <span class="label label-primary">Tools</span>
+                                    <span class="label label-info">4.0</span>
+                                    <span class="label label-success">Community</span>
+                                </div>
+                                <div class="asset-tags">
+                                    <span class="label label-default">AGPLv3</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="asset-footer">
+                        <a href="?user=arizoftgames" title="Search assets by 'arizoftgames'">arizoftgames</a>
+                        <span><b>0.4.2b</b> | 2025-12-10</span>
+                    </div>
+                </li>
+                            <li class="asset-item">
+                    <a href="/asset-library/asset/2453" class="asset-header">
+                        <img class="media-object" src="https://raw.githubusercontent.com/3ddelano/epic-online-services-godot/main/_media/logo.png" alt="Epic Online Services Godot (EOSG)'s icon" width=80 height=80>
+                        <div class="asset-title">
+                            <h4>Epic Online Services Godot (EOSG)</h4>
+                            <div class="asset-tags-container">
+                                <div class="asset-tags">
+                                    <span class="label label-primary">Misc</span>
+                                    <span class="label label-info">4.2</span>
+                                    <span class="label label-success">Community</span>
+                                </div>
+                                <div class="asset-tags">
+                                    <span class="label label-default">MIT</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="asset-footer">
+                        <a href="?user=3ddelano" title="Search assets by '3ddelano'">3ddelano</a>
+                        <span><b>2.2.5</b> | 2025-12-10</span>
+                    </div>
+                </li>
+                            <li class="asset-item">
+                    <a href="/asset-library/asset/4105" class="asset-header">
+                        <img class="media-object" src="https://raw.githubusercontent.com/Jeh3no/Godot-Simple-FPS-Weapon-System-Asset/refs/heads/main/addons/Arts/Images/Icon.png" alt="Simple FPS Weapon System's icon" width=80 height=80>
+                        <div class="asset-title">
+                            <h4>Simple FPS Weapon System</h4>
+                            <div class="asset-tags-container">
+                                <div class="asset-tags">
+                                    <span class="label label-primary">3D Tools</span>
+                                    <span class="label label-info">4.4</span>
+                                    <span class="label label-success">Community</span>
+                                </div>
+                                <div class="asset-tags">
+                                    <span class="label label-default">MIT</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="asset-footer">
+                        <a href="?user=Jeheno" title="Search assets by 'Jeheno'">Jeheno</a>
+                        <span><b>1.5</b> | 2025-12-10</span>
+                    </div>
+                </li>
+                            <li class="asset-item">
+                    <a href="/asset-library/asset/4514" class="asset-header">
+                        <img class="media-object" src="https://raw.githubusercontent.com/undomick/godot-nexus-vertex-painter/refs/heads/main/addons/nexus_vertex_painter/NVP_logo.png" alt="	Nexus Vertex Painter's icon" width=80 height=80>
+                        <div class="asset-title">
+                            <h4>	Nexus Vertex Painter</h4>
+                            <div class="asset-tags-container">
+                                <div class="asset-tags">
+                                    <span class="label label-primary">3D Tools</span>
+                                    <span class="label label-info">4.2</span>
+                                    <span class="label label-success">Community</span>
+                                </div>
+                                <div class="asset-tags">
+                                    <span class="label label-default">MIT</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="asset-footer">
+                        <a href="?user=movec" title="Search assets by 'movec'">movec</a>
+                        <span><b>1.4.0</b> | 2025-12-10</span>
+                    </div>
+                </li>
+                            <li class="asset-item">
+                    <a href="/asset-library/asset/2347" class="asset-header">
+                        <img class="media-object" src="https://cdn.prod.website-files.com/6446f1fc3506fe60c40890e9/6907cf2eea0cdc35e206771e_26ff6a99e901dedcf7334887e544fd8b_GDSyncWithBorder.png" alt="GD-Sync | Advanced Multiplayer Plugin's icon" width=80 height=80>
+                        <div class="asset-title">
+                            <h4>GD-Sync | Advanced Multiplayer Plugin</h4>
+                            <div class="asset-tags-container">
+                                <div class="asset-tags">
+                                    <span class="label label-primary">Tools</span>
+                                    <span class="label label-info">4.2</span>
+                                    <span class="label label-success">Community</span>
+                                </div>
+                                <div class="asset-tags">
+                                    <span class="label label-default">BSD-2-Clause</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="asset-footer">
+                        <a href="?user=GD-Sync" title="Search assets by 'GD-Sync'">GD-Sync</a>
+                        <span><b>0.13</b> | 2025-12-10</span>
+                    </div>
+                </li>
+                            <li class="asset-item">
+                    <a href="/asset-library/asset/3921" class="asset-header">
+                        <img class="media-object" src="https://raw.githubusercontent.com/madwind/simple_gdscript_formatter/refs/heads/main/icon.png" alt="Simple Gdscript Formatter's icon" width=80 height=80>
+                        <div class="asset-title">
+                            <h4>Simple Gdscript Formatter</h4>
+                            <div class="asset-tags-container">
+                                <div class="asset-tags">
+                                    <span class="label label-primary">Tools</span>
+                                    <span class="label label-info">4.5</span>
+                                    <span class="label label-success">Community</span>
+                                </div>
+                                <div class="asset-tags">
+                                    <span class="label label-default">MIT</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="asset-footer">
+                        <a href="?user=madwind" title="Search assets by 'madwind'">madwind</a>
+                        <span><b>0.4.10</b> | 2025-12-10</span>
+                    </div>
+                </li>
+                            <li class="asset-item">
+                    <a href="/asset-library/asset/4533" class="asset-header">
+                        <img class="media-object" src="https://raw.githubusercontent.com/Rubonnek/subtitles-importer/refs/heads/master/.github/images/icon.png" alt="Subtitles Importer's icon" width=80 height=80>
+                        <div class="asset-title">
+                            <h4>Subtitles Importer</h4>
+                            <div class="asset-tags-container">
+                                <div class="asset-tags">
+                                    <span class="label label-primary">Tools</span>
+                                    <span class="label label-info">4.2</span>
+                                    <span class="label label-success">Community</span>
+                                </div>
+                                <div class="asset-tags">
+                                    <span class="label label-default">MIT</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="asset-footer">
+                        <a href="?user=Rubonnek" title="Search assets by 'Rubonnek'">Rubonnek</a>
+                        <span><b>1.1.0</b> | 2025-12-10</span>
+                    </div>
+                </li>
+                            <li class="asset-item">
+                    <a href="/asset-library/asset/4544" class="asset-header">
+                        <img class="media-object" src="https://raw.githubusercontent.com/appsinacup/godot-apple-login/refs/heads/master/docs/godot-apple-sign-in.png" alt="Godot Apple Sign In (REPLACED BY Godot Apple Plugins)'s icon" width=80 height=80>
+                        <div class="asset-title">
+                            <h4>Godot Apple Sign In (REPLACED BY Godot Apple Plugins)</h4>
+                            <div class="asset-tags-container">
+                                <div class="asset-tags">
+                                    <span class="label label-primary">Tools</span>
+                                    <span class="label label-info">4.3</span>
+                                    <span class="label label-success">Community</span>
+                                </div>
+                                <div class="asset-tags">
+                                    <span class="label label-default">MIT</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="asset-footer">
+                        <a href="?user=ughuuu" title="Search assets by 'ughuuu'">ughuuu</a>
+                        <span><b>1.0.0</b> | 2025-12-10</span>
+                    </div>
+                </li>
+                            <li class="asset-item">
+                    <a href="/asset-library/asset/1615" class="asset-header">
+                        <img class="media-object" src="https://raw.githubusercontent.com/remijean/godot-3d-planet-generator/main/icon.png" alt="3D Planet Generator's icon" width=80 height=80>
+                        <div class="asset-title">
+                            <h4>3D Planet Generator</h4>
+                            <div class="asset-tags-container">
+                                <div class="asset-tags">
+                                    <span class="label label-primary">Shaders</span>
+                                    <span class="label label-info">4.5</span>
+                                    <span class="label label-success">Community</span>
+                                </div>
+                                <div class="asset-tags">
+                                    <span class="label label-default">MIT</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="asset-footer">
+                        <a href="?user=Naejimer" title="Search assets by 'Naejimer'">Naejimer</a>
+                        <span><b>1.0</b> | 2025-12-10</span>
+                    </div>
+                </li>
+                            <li class="asset-item">
+                    <a href="/asset-library/asset/4555" class="asset-header">
+                        <img class="media-object" src="https://raw.githubusercontent.com/Gardene-el/dither3d-gd/main/icon.png" alt="Surface-Stable Fractal Dithering for Godot's icon" width=80 height=80>
+                        <div class="asset-title">
+                            <h4>Surface-Stable Fractal Dithering for Godot</h4>
+                            <div class="asset-tags-container">
+                                <div class="asset-tags">
+                                    <span class="label label-primary">3D Tools</span>
+                                    <span class="label label-info">4.2</span>
+                                    <span class="label label-success">Community</span>
+                                </div>
+                                <div class="asset-tags">
+                                    <span class="label label-default">MPL-2.0</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="asset-footer">
+                        <a href="?user=Garden-eel" title="Search assets by 'Garden-eel'">Garden-eel</a>
+                        <span><b>1.0</b> | 2025-12-10</span>
+                    </div>
+                </li>
+                            <li class="asset-item">
+                    <a href="/asset-library/asset/1011" class="asset-header">
+                        <img class="media-object" src="https://raw.githubusercontent.com/martijnbolt/insert-coins/master/insert-coins-icon.png" alt="insert-coin(s) | (micro)payment system's icon" width=80 height=80>
+                        <div class="asset-title">
+                            <h4>insert-coin(s) | (micro)payment system</h4>
+                            <div class="asset-tags-container">
+                                <div class="asset-tags">
+                                    <span class="label label-primary">Projects</span>
+                                    <span class="label label-info">3.1</span>
+                                    <span class="label label-success">Community</span>
+                                </div>
+                                <div class="asset-tags">
+                                    <span class="label label-default">MIT</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="asset-footer">
+                        <a href="?user=martijnbolt" title="Search assets by 'martijnbolt'">martijnbolt</a>
+                        <span><b>0.1</b> | 2025-12-10</span>
+                    </div>
+                </li>
+                            <li class="asset-item">
+                    <a href="/asset-library/asset/4475" class="asset-header">
+                        <img class="media-object" src="https://raw.githubusercontent.com/godot-x/firebase/refs/heads/main/extras/images/icon.png" alt="Godotx Firebase's icon" width=80 height=80>
+                        <div class="asset-title">
+                            <h4>Godotx Firebase</h4>
+                            <div class="asset-tags-container">
+                                <div class="asset-tags">
+                                    <span class="label label-primary">Tools</span>
+                                    <span class="label label-info">4.5</span>
+                                    <span class="label label-success">Community</span>
+                                </div>
+                                <div class="asset-tags">
+                                    <span class="label label-default">MIT</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="asset-footer">
+                        <a href="?user=paulocoutinho" title="Search assets by 'paulocoutinho'">paulocoutinho</a>
+                        <span><b>1.1.0</b> | 2025-12-10</span>
+                    </div>
+                </li>
+                            <li class="asset-item">
+                    <a href="/asset-library/asset/3427" class="asset-header">
+                        <img class="media-object" src="https://raw.githubusercontent.com/FlamxGames/godot-ai-assistant-hub/refs/heads/main/logo.png" alt="AI Assistant Hub's icon" width=80 height=80>
+                        <div class="asset-title">
+                            <h4>AI Assistant Hub</h4>
+                            <div class="asset-tags-container">
+                                <div class="asset-tags">
+                                    <span class="label label-primary">Tools</span>
+                                    <span class="label label-info">4.0</span>
+                                    <span class="label label-success">Community</span>
+                                </div>
+                                <div class="asset-tags">
+                                    <span class="label label-default">MIT</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="asset-footer">
+                        <a href="?user=FlamxGames" title="Search assets by 'FlamxGames'">FlamxGames</a>
+                        <span><b>1.7.3</b> | 2025-12-10</span>
+                    </div>
+                </li>
+                            <li class="asset-item">
+                    <a href="/asset-library/asset/4554" class="asset-header">
+                        <img class="media-object" src="https://raw.githubusercontent.com/IgnacioPorte/godot-breez-bitcoin-plugin/main/icon.png" alt="Bitcoin/Lightning - Breez's icon" width=80 height=80>
+                        <div class="asset-title">
+                            <h4>Bitcoin/Lightning - Breez</h4>
+                            <div class="asset-tags-container">
+                                <div class="asset-tags">
+                                    <span class="label label-primary">Tools</span>
+                                    <span class="label label-info">4.1</span>
+                                    <span class="label label-success">Community</span>
+                                </div>
+                                <div class="asset-tags">
+                                    <span class="label label-default">MIT</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="asset-footer">
+                        <a href="?user=IgnacioPorte" title="Search assets by 'IgnacioPorte'">IgnacioPorte</a>
+                        <span><b>v.0.1.1</b> | 2025-12-10</span>
+                    </div>
+                </li>
+                            <li class="asset-item">
+                    <a href="/asset-library/asset/3626" class="asset-header">
+                        <img class="media-object" src="https://raw.githubusercontent.com/iiMidknightii/PathMesh3D/refs/heads/main/addons/PathMesh3D/icons/PathMesh3DIcon.png" alt="PathMesh3D's icon" width=80 height=80>
+                        <div class="asset-title">
+                            <h4>PathMesh3D</h4>
+                            <div class="asset-tags-container">
+                                <div class="asset-tags">
+                                    <span class="label label-primary">3D Tools</span>
+                                    <span class="label label-info">4.3</span>
+                                    <span class="label label-success">Community</span>
+                                </div>
+                                <div class="asset-tags">
+                                    <span class="label label-default">MIT</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="asset-footer">
+                        <a href="?user=iiMidknightii" title="Search assets by 'iiMidknightii'">iiMidknightii</a>
+                        <span><b>1.5.0</b> | 2025-12-10</span>
+                    </div>
+                </li>
+                            <li class="asset-item">
+                    <a href="/asset-library/asset/4472" class="asset-header">
+                        <img class="media-object" src="https://raw.githubusercontent.com/xibbon/xogot_connect/main/icon.png" alt="Xogot Connect's icon" width=80 height=80>
+                        <div class="asset-title">
+                            <h4>Xogot Connect</h4>
+                            <div class="asset-tags-container">
+                                <div class="asset-tags">
+                                    <span class="label label-primary">Tools</span>
+                                    <span class="label label-info">4.4</span>
+                                    <span class="label label-success">Community</span>
+                                </div>
+                                <div class="asset-tags">
+                                    <span class="label label-default">MIT</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="asset-footer">
+                        <a href="?user=Xogot" title="Search assets by 'Xogot'">Xogot</a>
+                        <span><b>1.0.3</b> | 2025-12-08</span>
+                    </div>
+                </li>
+                            <li class="asset-item">
+                    <a href="/asset-library/asset/4552" class="asset-header">
+                        <img class="media-object" src="https://raw.githubusercontent.com/migueldeicaza/GodotApplePlugins/main/GodotApplePlugins.png" alt="Godot Apple Plugins's icon" width=80 height=80>
+                        <div class="asset-title">
+                            <h4>Godot Apple Plugins</h4>
+                            <div class="asset-tags-container">
+                                <div class="asset-tags">
+                                    <span class="label label-primary">Misc</span>
+                                    <span class="label label-info">4.3</span>
+                                    <span class="label label-success">Community</span>
+                                </div>
+                                <div class="asset-tags">
+                                    <span class="label label-default">MIT</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="asset-footer">
+                        <a href="?user=migueldeicaza" title="Search assets by 'migueldeicaza'">migueldeicaza</a>
+                        <span><b>1.0</b> | 2025-12-08</span>
+                    </div>
+                </li>
+                    </ol>
+
+        <nav class="pagination-container" aria-label="Page navigation">
+    <ul class="pagination">
+
+                    <li class="disabled" aria-hidden="true"><a>&laquo;</a></li>
+        
+                
+        
+                                    <li class="active">
+                    <a href="?page=0&amp;sort=updated">1</a>
+                </li>
+                <span class="sr-only">(current)</span>
+                                                <li><a href="?page=1&amp;sort=updated">2</a></li>
+                                                <li><a href="?page=2&amp;sort=updated">3</a></li>
+                    
+                    <li class="disabled"><a>…</a></li>
+        
+                    <li><a href="?page=110&amp;sort=updated">111</a></li>
+        
+                    <li>
+                <a href="?page=1&amp;sort=updated" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+            </ul>
+</nav>
+
+<div class="pagination-stats">
+    <div>
+        Items per page: <span class="btn-group btn-group-xs" role="group" aria-label="Page size">
+                            <a href="?max_results=40&amp;page=0&amp;sort=updated" class="btn btn-default active" aria-label="Per page">
+                    40                </a>
+                            <a href="?max_results=100&amp;page=0&amp;sort=updated" class="btn btn-default " aria-label="Per page">
+                    100                </a>
+                            <a href="?max_results=200&amp;page=0&amp;sort=updated" class="btn btn-default " aria-label="Per page">
+                    200                </a>
+                            <a href="?max_results=500&amp;page=0&amp;sort=updated" class="btn btn-default " aria-label="Per page">
+                    500                </a>
+                    </span>
+    </div>
+    <div>
+        40 items per page, 4439 items total.
+    </div>
+</div>
+    </div>
+</div>
+
+        </main>
+        <footer>
+            <div class="container">
+                <div class="col-md-12">
+                    <hr/>
+                    <p>
+                        Copyright &copy; 2025 The Godot Engine community - MIT licensed
+                        
+                                                                                                                        <span class="text-muted pull-right">
+                                        Currently running version <a href="https://github.com/godotengine/asset-library/commit/84260eca5ea5bfb8d01d1c92e00786c920f6d26f">84260ec</a>.
+                                    </span>
+                                                                                                        </p>
+                    <p class="text-muted text-right">
+                        Links:
+                        <a href="https://github.com/godotengine/asset-library">GitHub repository</a> |
+                        <a href="https://github.com/godotengine/asset-library/issues">Issues</a> |
+                        <a href="https://godotengine.org">Godot Engine homepage</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script defer src="/asset-library/assets/js/jquery-3.7.0.slim.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script defer src="/asset-library/assets/js/bootstrap-3.4.1.min.js"></script>
+</body>
+
+</html>
