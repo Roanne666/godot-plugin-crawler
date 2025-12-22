@@ -3,6 +3,52 @@ import { Asset } from "../types";
 import { USE_AI, ASSET_URL } from "../config";
 import { summarize } from "../summarizer";
 import { fetchWithRetry } from "./httpClient";
+import { Site } from "./sites/site";
+import GithubSite from "./sites/github";
+import CodebergSite from "./sites/codeberg";
+
+const siteMppings: { [key: string]: Site } = {
+  "github.com": GithubSite,
+  "codeberg.org": CodebergSite,
+};
+
+const getSite = (repoUrl: string): Site | undefined => {
+  for (const domain in siteMppings) {
+    if (repoUrl.includes(domain)) {
+      return siteMppings[domain];
+    }
+  }
+  return undefined;
+};
+
+export const crawlAsset = async (asset: Asset): Promise<Asset> => {
+  const repoUrl = await fetchAssetPage(asset.url);
+
+  if (!repoUrl) {
+    return asset;
+  }
+
+  const site = getSite(repoUrl);
+
+  if (!site) {
+    return asset;
+  }
+
+  const $ = await site.fetchPage(repoUrl);
+  const apiData = await (site as any).fetchApi?.(repoUrl);
+
+  const content = site.getContent($);
+  const stars = site.getStars(apiData || $);
+  const lastCommit = site.getLastCommit(apiData || $);
+
+  return {
+    ...asset,
+    repoUrl,
+    repoContent: content,
+    stars,
+    lastCommit,
+  };
+};
 
 // Asset parsing functions
 function getSupportLevel($element: cheerio.Cheerio<any>): string {
@@ -57,50 +103,6 @@ async function fetchAssetPage(url: string): Promise<string | undefined> {
   return extractRepoUrlFromAssetPage(response as string);
 }
 
-async function fetchGithubPage(url: string): Promise<cheerio.CheerioAPI | undefined> {
-  const response = await fetchWithRetry(url, { skipOn404: true });
-  if (!response) return undefined;
-
-  return cheerio.load(response as string);
-}
-
-async function fetchGithubApi(url: string): Promise<any | undefined> {
-  const match = url.match(/github\.com\/([^\/]+)\/([^\/\?#]+)/);
-  if (!match) return undefined;
-
-  const [, user, repo] = match;
-  const apiUrl = `https://api.github.com/repos/${user}/${repo}`;
-
-  return await fetchWithRetry(apiUrl, { isGithubApi: true });
-}
-
-function getGithubContent($: cheerio.CheerioAPI): string {
-  try {
-    return $("article.markdown-body.entry-content.container-lg").text() || "";
-  } catch (error) {
-    console.error("Error getting page content:", error);
-    return "";
-  }
-}
-
-function getGithubStars(apiData: any): number {
-  try {
-    return apiData.stargazers_count || 0;
-  } catch (error) {
-    console.error("Error getting github stars:", error);
-    return 0;
-  }
-}
-
-function getGithubLastCommit(apiData: any): string {
-  try {
-    return apiData.updated_at || "";
-  } catch (error) {
-    console.error("Error getting github last commit:", error);
-    return "";
-  }
-}
-
 // Main service functions
 export async function fetchAssetsForPage(page: number): Promise<Asset[]> {
   const url = `${ASSET_URL}?sort=updated&page=${page}`;
@@ -119,25 +121,32 @@ export async function fetchAndProcessAssetDetails(asset: Asset, existingAsset?: 
   if (!repoUrl) return asset;
 
   asset.repoUrl = repoUrl;
-  if (repoUrl.includes("github.com")) {
-    const apiData = await fetchGithubApi(repoUrl);
-    if (apiData === 404) {
+
+  const site = getSite(repoUrl);
+  if (!site) {
+    return asset;
+  }
+
+  try {
+    const $ = await site.fetchPage(repoUrl);
+    const apiData = await (site as any).fetchApi?.(repoUrl);
+
+    if (apiData === 404 || apiData === 403) {
       asset.repoContent = "error";
-      return asset;
-    } else if (apiData === 403) {
       return asset;
     }
 
-    const $ = await fetchGithubPage(repoUrl);
     if ($) {
-      asset.repoContent = getGithubContent($);
+      asset.repoContent = site.getContent($);
     } else {
       asset.repoContent = "error";
       return asset;
     }
 
-    asset.stars = getGithubStars(apiData);
-    asset.lastCommit = getGithubLastCommit(apiData);
+    // Use API data if available, otherwise use page data
+    const dataSource = apiData || $;
+    asset.stars = site.getStars(dataSource);
+    asset.lastCommit = site.getLastCommit(dataSource);
 
     const contentChanged = existingAsset?.repoContent !== asset.repoContent;
 
@@ -148,6 +157,11 @@ export async function fetchAndProcessAssetDetails(asset: Asset, existingAsset?: 
     } else {
       asset.summary = await summarize(asset);
     }
+  } catch (error) {
+    console.error(`Error processing ${repoUrl}:`, error);
+    asset.repoContent = "error";
+    return asset;
   }
+
   return asset;
 }
