@@ -15,8 +15,11 @@ export const DATABASE_PATH = process.env.DATABASE_PATH || path.resolve(__dirname
 export const SERVER_PORT = parseInt(process.env.SERVER_PORT || "3001");
 export const PROXY = process.env.PROXY || "";
 
-export const USER_AGENT = process.env.USER_AGENT || "";
 export const GITHUB_TOKEN = process.env.GITHUB_TOKEN || "";
+export const GITHUB_USER_AGENT = process.env.GITHUB_USER_AGENT || "";
+
+export const GITLAB_TOKEN = process.env.GITLAB_TOKEN || "";
+export const GITLAB_USER_AGENT = process.env.GITLAB_USER_AGENT || "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36";
 
 export const USE_AI = (process.env.USE_AI || "0") === "1";
 export const AI_BASE_URL = process.env.AI_BASE_URL || "";
