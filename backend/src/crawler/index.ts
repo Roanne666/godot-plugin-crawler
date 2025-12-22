@@ -1,7 +1,7 @@
 import { initDatabase } from "../database";
 import { CrawlerOrchestrator } from "./crawlerOrchestrator";
 
-export { fetchAndProcessAssetDetails } from "./assetProcessor";
+export { fetchAndProcessAssetDetails } from "./assetService";
 
 export async function startCrawler() {
   try {

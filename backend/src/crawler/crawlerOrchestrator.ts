@@ -1,8 +1,7 @@
 import { MAX_PAGE, MAX_ASSETS } from "../config";
 import { Asset, ProcessingStats } from "../types";
 import { getAssetByUrl, insertOrUpdateAsset } from "../database";
-import { fetchAssetsForPage } from "./assetPageService";
-import { fetchAndProcessAssetDetails } from "./assetProcessor";
+import { fetchAssetsForPage, fetchAndProcessAssetDetails } from "./assetService";
 
 export class CrawlerOrchestrator {
   private stats: ProcessingStats = {
