@@ -106,11 +106,10 @@ export async function startServer() {
 
   app.listen(SERVER_PORT, () => {
     console.log(`Server running on port ${SERVER_PORT}`);
-    
+
     const url = `http://localhost:${SERVER_PORT}`;
-    const start = process.platform === 'darwin' ? 'open' : 
-                  process.platform === 'win32' ? 'start' : 'xdg-open';
-    
+    const start = process.platform === "darwin" ? "open" : process.platform === "win32" ? "start" : "xdg-open";
+
     exec(`${start} ${url}`, (error) => {
       if (error) {
         console.log(`Failed to open browser automatically: ${error.message}`);

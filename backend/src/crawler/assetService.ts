@@ -6,10 +6,12 @@ import { fetchWithRetry } from "./httpClient";
 import { Site } from "./sites/site";
 import GithubSite from "./sites/github";
 import CodebergSite from "./sites/codeberg";
+import GitlabSite from "./sites/gitlab";
 
 const siteMppings: { [key: string]: Site } = {
   "github.com": GithubSite,
   "codeberg.org": CodebergSite,
+  "gitlab.com": GitlabSite,
 };
 
 const getSite = (repoUrl: string): Site | undefined => {
@@ -34,19 +36,14 @@ export const crawlAsset = async (asset: Asset): Promise<Asset> => {
     return asset;
   }
 
-  const $ = await site.fetchPage(repoUrl);
-  const apiData = await (site as any).fetchApi?.(repoUrl);
-
-  const content = site.getContent($);
-  const stars = site.getStars(apiData || $);
-  const lastCommit = site.getLastCommit(apiData || $);
+  const data = await site.fetchData(repoUrl);
 
   return {
     ...asset,
     repoUrl,
-    repoContent: content,
-    stars,
-    lastCommit,
+    repoContent: data.content,
+    stars: data.stars,
+    lastCommit: data.lastCommit,
   };
 };
 
@@ -128,25 +125,11 @@ export async function fetchAndProcessAssetDetails(asset: Asset, existingAsset?: 
   }
 
   try {
-    const $ = await site.fetchPage(repoUrl);
-    const apiData = await (site as any).fetchApi?.(repoUrl);
+    const data = await site.fetchData(repoUrl);
 
-    if (apiData === 404 || apiData === 403) {
-      asset.repoContent = "error";
-      return asset;
-    }
-
-    if ($) {
-      asset.repoContent = site.getContent($);
-    } else {
-      asset.repoContent = "error";
-      return asset;
-    }
-
-    // Use API data if available, otherwise use page data
-    const dataSource = apiData || $;
-    asset.stars = site.getStars(dataSource);
-    asset.lastCommit = site.getLastCommit(dataSource);
+    asset.repoContent = data.content;
+    asset.stars = data.stars;
+    asset.lastCommit = data.lastCommit;
 
     const contentChanged = existingAsset?.repoContent !== asset.repoContent;
 

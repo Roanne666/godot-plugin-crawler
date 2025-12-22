@@ -1,38 +1,41 @@
-import { Site, fetchCheerio } from "./site";
 import * as cheerio from "cheerio";
+import { fetchWithRetry } from "../httpClient";
+import { Site } from "./site";
 
 class CodebergSite implements Site {
-  fetchPage = fetchCheerio;
+  userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36";
 
-  getContent($: cheerio.CheerioAPI): string {
-    const content = $("#readme .markup.markdown").text();
-
-    if (!content) {
-      return "";
+  async fetchData(repoUrl: string): Promise<{
+    content: string;
+    stars: number;
+    lastCommit: string;
+  }> {
+    // Fetch HTML page
+    const response = await fetchWithRetry(repoUrl, { userAgent: this.userAgent });
+    if (!response) {
+      throw new Error(`Failed to fetch page: ${repoUrl}`);
     }
 
-    return content.trim();
-  }
+    // Convert response to string and load cheerio
+    const html = typeof response === "string" ? response : String(response);
+    const $ = cheerio.load(html);
 
-  getStars($: cheerio.CheerioAPI): number {
-    const stars = $('a[href*="/stars"]').first().text();
+    // Extract content from README
+    const content = $("#readme .markup.markdown").text().trim();
 
-    if (!stars) {
-      return 0;
-    }
+    // Extract stars
+    const starsText = $('a[href*="/stars"]').first().text().trim();
+    const stars = starsText ? parseInt(starsText) : 0;
+    const finalStars = isNaN(stars) ? 0 : stars;
 
-    const starCount = parseInt(stars.trim());
-    return isNaN(starCount) ? 0 : starCount;
-  }
+    // Extract last commit date
+    const lastCommit = $(".commit-list .age relative-time").attr("datetime") || "";
 
-  getLastCommit($: cheerio.CheerioAPI): string {
-    const lastCommit = $(".commit-list .age relative-time").attr("datetime");
-
-    if (!lastCommit) {
-      return "";
-    }
-
-    return lastCommit;
+    return {
+      content,
+      stars: finalStars,
+      lastCommit,
+    };
   }
 }
 
