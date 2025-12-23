@@ -114,6 +114,24 @@ export async function fetchAssetsForPage(page: number): Promise<Asset[]> {
 }
 
 export async function fetchAndProcessAssetDetails(asset: Asset, existingAsset?: Asset): Promise<Asset> {
+  // 检查是否已存在资源且版本和日期没有更新
+  if (existingAsset && 
+      existingAsset.version === asset.version && 
+      existingAsset.lastUpdated === asset.lastUpdated &&
+      existingAsset.repoUrl) {
+    console.log(`Skipping fetchAssetPage for ${asset.title} - version and date unchanged`);
+    
+    // 直接使用现有的 site 信息
+    asset.repoUrl = existingAsset.repoUrl;
+    asset.repoContent = existingAsset.repoContent;
+    asset.stars = existingAsset.stars;
+    asset.lastCommit = existingAsset.lastCommit;
+    asset.summary = existingAsset.summary;
+    
+    return asset;
+  }
+
+  // 版本或日期有变化，需要重新获取
   const repoUrl = await fetchAssetPage(asset.url);
   if (!repoUrl) return asset;
 
