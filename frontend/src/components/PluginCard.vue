@@ -293,6 +293,6 @@ export default defineComponent({
 }
 
 :lang(zh-cn) .new-badge {
-  font-size: 14px;
+  font-size: 12px;
 }
 </style>
