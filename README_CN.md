@@ -8,9 +8,11 @@
 
 - 🔍 **智能爬虫**: 自动爬取 Godot 官方插件库的所有插件信息
 - 📊 **详细信息**: 获取插件的详细描述、作者信息、版本、许可证等
+- 🌐 **多平台支持**: 支持来自 GitHub、GitLab 和 Codeberg 的插件
 - 🤖 **AI 摘要**: 使用 AI 技术自动生成插件功能摘要（可选）
-- 💾 **本地存储**: 使用 SQLite 数据库本地存储插件数据
-- 🎨 **现代界面**: 基于 Vue 3 的响应式前端界面
+- 💾 **本地存储**: 使用 SQLite 数据库本地存储插件数据，实现快速访问
+- 🎨 **现代界面**: 基于 Vue 3、TypeScript 和 Vite 构建的响应式前端界面
+- 🌍 **国际化支持**: 内置 i18n 支持，提供中文和英文界面
 - ⭐ **收藏功能**: 支持标记和管理喜欢的插件
 - 🔄 **手动更新**: 支持手动刷新单个插件信息
 - 🔷 **高级筛选**: 按 Godot 版本、分类、许可证、支持级别和搜索查询筛选
@@ -20,39 +22,49 @@
 
 ```
 godot-plugin-crawler/
-├── backend/                    # 后端服务
+├── backend/                    # 后端服务 (TypeScript/Node.js)
 │   ├── src/
 │   │   ├── crawler/           # 网络爬虫模块
-│   │   │   ├── assetPageService.ts
-│   │   │   ├── assetParser.ts
-│   │   │   ├── assetProcessor.ts
-│   │   │   ├── crawlerOrchestrator.ts
-│   │   │   ├── githubService.ts
-│   │   │   ├── httpClient.ts
-│   │   │   └── index.ts
-│   │   ├── server.ts          # Express 服务器
-│   │   ├── database.ts        # 数据库操作
+│   │   │   ├── crawlerOrchestrator.ts  # 主爬虫控制器
+│   │   │   ├── httpClient.ts           # 带重试逻辑的 HTTP 客户端
+│   │   │   ├── assetService.ts         # 插件处理服务
+│   │   │   ├── sites/                   # 平台特定爬虫
+│   │   │   │   ├── github.ts           # GitHub 集成
+│   │   │   │   ├── gitlab.ts           # GitLab 集成
+│   │   │   │   ├── codeberg.ts         # Codeberg 集成
+│   │   │   │   └── site.ts             # 基础接口
+│   │   │   └── index.ts                # 爬虫入口点
+│   │   ├── server.ts          # Express 服务器和 API 端点
+│   │   ├── database.ts        # SQLite 数据库操作
 │   │   ├── config.ts          # 配置管理
 │   │   ├── types.ts           # TypeScript 类型定义
-│   │   └── summarizer.ts      # AI 摘要服务
-│   ├── data/                  # 数据库文件
-│   ├── reference/             # 参考文件
-│   └── package.json
-├── frontend/                  # 前端应用
+│   │   └── summarizer.ts      # AI 摘要服务 (OpenAI)
+│   ├── data/                  # SQLite 数据库文件
+│   ├── package.json           # 后端依赖
+│   └── tsconfig.json          # TypeScript 配置
+├── frontend/                  # 前端应用 (Vue 3/Vite)
 │   ├── src/
 │   │   ├── components/        # Vue 组件
-│   │   │   ├── FilterSidebar.vue
-│   │   │   ├── Pagination.vue
-│   │   │   ├── PluginCard.vue
-│   │   │   ├── PluginGrid.vue
-│   │   │   └── PluginList.vue
+│   │   │   ├── FilterSidebar.vue      # 高级筛选界面
+│   │   │   ├── LanguageSwitcher.vue   # 语言切换器
+│   │   │   ├── Pagination.vue         # 分页组件
+│   │   │   ├── PluginCard.vue         # 单个插件卡片
+│   │   │   ├── PluginGrid.vue         # 插件网格布局
+│   │   │   └── PluginList.vue         # 主插件列表
 │   │   ├── services/          # API 服务
+│   │   │   └── api.ts                # API 客户端
+│   │   ├── utils/             # 工具函数
+│   │   │   └── i18n.ts               # 国际化
 │   │   ├── App.vue            # 根组件
-│   │   └── main.ts            # 入口文件
+│   │   ├── main.ts            # 应用入口点
+│   │   └── style.css          # 全局样式
 │   ├── public/                # 静态资源
-│   └── package.json
+│   ├── package.json           # 前端依赖
+│   └── vite.config.ts         # Vite 配置
 ├── .env.example               # 环境变量模板
-└── README.md
+├── license                    # MIT 许可证
+├── README.md                  # 英文文档
+└── README_CN.md               # 中文文档
 ```
 
 ## 快速开始
@@ -61,6 +73,7 @@ godot-plugin-crawler/
 
 - Node.js 16+
 - npm 或 yarn
+- GitHub 个人访问令牌（获取仓库信息必需）
 
 ### 安装依赖
 
@@ -94,20 +107,24 @@ MAX_ASSETS=9999                # 最大插件数量
 MAX_RETRIES=3                  # 最大重试次数
 RETRY_DELAY_BASE=1000          # 重试延迟基数(ms)
 
-# GitHub API 配置
+# GitHub API 配置（必需）
 GITHUB_TOKEN="your_github_token"
+GITHUB_USER_AGENT="GodotPluginCrawler/1.0"
+
+# GitLab API 配置（可选）
+GITLAB_TOKEN="your_gitlab_token"
+GITLAB_USER_AGENT="GodotPluginCrawler/1.0"
 
 # AI 摘要配置（可选）
-USE_AI=1                       # 启用 AI 摘要（1=启用，0=禁用）
+USE_AI=0                       # 启用 AI 摘要（1=启用，0=禁用）
 AI_BASE_URL="https://api.openai.com/v1"
 AI_API_KEY="your_openai_api_key"
 AI_MODEL="gpt-3.5-turbo"
-SUMMARIZE_PROMPT="You are a programmer who is good at summarizing code repositories..."
+SUMMARIZE_PROMPT="You are a programmer who is good at summarizing code repositories. Below is the code for a Godot plugin. Please summarize its functionality based on the code."
 
 # 其他配置（可选）
 SERVER_PORT=3001               # 后端服务端口
-PROXY=""                       # 代理配置
-USER_AGENT="Your User Agent" 
+PROXY=""                       # 代理配置（如需要）
 ```
 
 ### 运行项目
@@ -175,7 +192,7 @@ interface Asset {
   repoUrl: string;         // 代码仓库URL
   repoContent: string;     // 仓库内容摘要
   summary: string;         // AI 生成的功能摘要
-  stars: number;           // GitHub 星标数
+  stars: number;           // 星标数
   lastCommit: string;      // 最后提交时间
   crawledAt?: string;      // 爬取时间
   favorite?: boolean;      // 是否收藏
@@ -196,8 +213,8 @@ npm run server   # 启动服务器
 
 ```bash
 cd frontend
-npm run dev      # 启动开发服务器
-npm run build    # 构建生产版本
+npm run dev      # 启动开发服务器 (http://localhost:5173)
+npm run build    # 构建生产版本 (TypeScript 编译 + Vite 打包)
 npm run preview  # 预览生产版本
 ```
 
@@ -225,11 +242,7 @@ npm run server
 ## ⚠️ 注意事项
 
 - 爬取时请遵守 Godot 官方的 robots.txt 和使用条款
-- 建议设置合理的请求间隔，避免对服务器造成压力
-- AI 摘要功能需要 OpenAI API Key，可能会产生费用
-- 数据库文件 `backend/data/plugins.db` 会自动创建
-- 首次爬取可能需要较长时间，具体取决于配置的页面数量
-- GitHub Token 是必需的，用于获取仓库信息
+- GitHub 个人访问令牌是**必需的**，用于获取仓库信息
 
 ## 贡献
 

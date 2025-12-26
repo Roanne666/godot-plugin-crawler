@@ -2,15 +2,17 @@
 
 [中文](./README_CN.md) | English
 
-A comprehensive solution for crawling and displaying Godot Engine plugin library, featuring a backend crawler service and a modern frontend interface.
+A comprehensive solution for crawling and displaying Godot Engine plugin library, featuring a backend crawler service built with TypeScript/Node.js and a modern frontend interface built with Vue 3.
 
 ## 🚀 Features
 
 - **🔍 Intelligent Crawling**: Automatically crawls all plugins from the official Godot Asset Library
 - **📊 Detailed Information**: Extracts comprehensive plugin data including descriptions, author info, versions, licenses, and more
+- **🌐 Multi-Platform Support**: Supports plugins from GitHub, GitLab, and Codeberg repositories
 - **🤖 AI Summaries**: Uses AI technology to automatically generate plugin functionality summaries (optional)
-- **💾 Local Storage**: Stores plugin data locally using SQLite database
-- **🎨 Modern Interface**: Responsive frontend built with Vue 3 and TypeScript
+- **💾 Local Storage**: Stores plugin data locally using SQLite database for fast access
+- **🎨 Modern Interface**: Responsive frontend built with Vue 3, TypeScript, and Vite
+- **🌍 Internationalization**: Built-in i18n support with Chinese and English languages
 - **⭐ Favorites Management**: Support for marking and managing favorite plugins
 - **🔄 Manual Updates**: Support for manual refresh of individual plugin information
 - **🔷 Advanced Filtering**: Filter by Godot version, category, license, support level, and search queries
@@ -20,39 +22,49 @@ A comprehensive solution for crawling and displaying Godot Engine plugin library
 
 ```
 godot-plugin-crawler/
-├── backend/                    # Backend service
+├── backend/                    # Backend service (TypeScript/Node.js)
 │   ├── src/
 │   │   ├── crawler/           # Web crawler modules
-│   │   │   ├── assetPageService.ts
-│   │   │   ├── assetParser.ts
-│   │   │   ├── assetProcessor.ts
-│   │   │   ├── crawlerOrchestrator.ts
-│   │   │   ├── githubService.ts
-│   │   │   ├── httpClient.ts
-│   │   │   └── index.ts
-│   │   ├── server.ts          # Express server
-│   │   ├── database.ts        # Database operations
+│   │   │   ├── crawlerOrchestrator.ts  # Main crawler controller
+│   │   │   ├── httpClient.ts           # HTTP client with retry logic
+│   │   │   ├── assetService.ts         # Asset processing service
+│   │   │   ├── sites/                   # Platform-specific crawlers
+│   │   │   │   ├── github.ts           # GitHub integration
+│   │   │   │   ├── gitlab.ts           # GitLab integration
+│   │   │   │   ├── codeberg.ts         # Codeberg integration
+│   │   │   │   └── site.ts             # Base interface
+│   │   │   └── index.ts                # Crawler entry point
+│   │   ├── server.ts          # Express server with API endpoints
+│   │   ├── database.ts        # SQLite database operations
 │   │   ├── config.ts          # Configuration management
 │   │   ├── types.ts           # TypeScript type definitions
-│   │   └── summarizer.ts      # AI summary service
-│   ├── data/                  # Database files
-│   ├── reference/             # Reference HTML files
-│   └── package.json
-├── frontend/                  # Frontend application
+│   │   └── summarizer.ts      # AI summary service (OpenAI)
+│   ├── data/                  # SQLite database files
+│   ├── package.json           # Backend dependencies
+│   └── tsconfig.json          # TypeScript configuration
+├── frontend/                  # Frontend application (Vue 3/Vite)
 │   ├── src/
 │   │   ├── components/        # Vue components
-│   │   │   ├── FilterSidebar.vue
-│   │   │   ├── Pagination.vue
-│   │   │   ├── PluginCard.vue
-│   │   │   ├── PluginGrid.vue
-│   │   │   └── PluginList.vue
+│   │   │   ├── FilterSidebar.vue      # Advanced filtering UI
+│   │   │   ├── LanguageSwitcher.vue   # Language switcher
+│   │   │   ├── Pagination.vue         # Pagination component
+│   │   │   ├── PluginCard.vue         # Individual plugin card
+│   │   │   ├── PluginGrid.vue         # Plugin grid layout
+│   │   │   └── PluginList.vue         # Main plugin list
 │   │   ├── services/          # API services
+│   │   │   └── api.ts                # API client
+│   │   ├── utils/             # Utility functions
+│   │   │   └── i18n.ts               # Internationalization
 │   │   ├── App.vue            # Root component
-│   │   └── main.ts            # Entry point
+│   │   ├── main.ts            # Application entry point
+│   │   └── style.css          # Global styles
 │   ├── public/                # Static assets
-│   └── package.json
+│   ├── package.json           # Frontend dependencies
+│   └── vite.config.ts         # Vite configuration
 ├── .env.example               # Environment variables template
-└── README.md
+├── license                    # MIT License
+├── README.md                  # This file
+└── README_CN.md               # Chinese documentation
 ```
 
 ## ⚡ Quick Start
@@ -61,6 +73,7 @@ godot-plugin-crawler/
 
 - Node.js 16+ 
 - npm or yarn
+- GitHub Personal Access Token (required for repository information)
 
 ### Installation
 
@@ -103,18 +116,22 @@ RETRY_DELAY_BASE=1000          # Base retry delay (ms)
 
 # GitHub API Configuration (Required)
 GITHUB_TOKEN="your_github_token"
+GITHUB_USER_AGENT="GodotPluginCrawler/1.0"
+
+# GitLab API Configuration (Optional)
+GITLAB_TOKEN="your_gitlab_token"
+GITLAB_USER_AGENT="GodotPluginCrawler/1.0"
 
 # AI Summary Configuration (Optional)
-USE_AI=1                       # Enable AI summaries (1=enabled, 0=disabled)
+USE_AI=0                       # Enable AI summaries (1=enabled, 0=disabled)
 AI_BASE_URL="https://api.openai.com/v1"
 AI_API_KEY="your_openai_api_key"
 AI_MODEL="gpt-3.5-turbo"
-SUMMARIZE_PROMPT="You are a programmer who is good at summarizing code repositories..."
+SUMMARIZE_PROMPT="You are a programmer who is good at summarizing code repositories. Below is the code for a Godot plugin. Please summarize its functionality based on the code."
 
 # Other Configuration (Optional)
 SERVER_PORT=3001               # Backend service port
-PROXY=""                       # Proxy configuration
-USER_AGENT="Your User Agent"
+PROXY=""                       # Proxy configuration (if needed)
 ```
 
 ### Running the Application
@@ -182,7 +199,7 @@ interface Asset {
   repoUrl: string;         // Repository URL
   repoContent: string;     // Repository content summary
   summary: string;         // AI-generated functionality summary
-  stars: number;           // GitHub stars count
+  stars: number;           // stars count
   lastCommit: string;      // Last commit time
   crawledAt?: string;      // Crawling timestamp
   favorite?: boolean;      // Favorite status
@@ -203,8 +220,8 @@ npm run server   # Start the server
 
 ```bash
 cd frontend
-npm run dev      # Start development server
-npm run build    # Build for production
+npm run dev      # Start development server (http://localhost:5173)
+npm run build    # Build for production (TypeScript compilation + Vite bundling)
 npm run preview  # Preview production build
 ```
 
@@ -230,10 +247,7 @@ The backend automatically serves the built frontend if the `frontend/dist` folde
 ## ⚠️ Notes
 
 - Please respect Godot's robots.txt and terms of service when crawling
-- Set reasonable request intervals to avoid server overload
-- AI summary feature requires OpenAI API key and may incur costs
-- Database file `backend/data/plugins.db` will be created automatically
-- First-time crawling may take considerable time depending on configuration
+- GitHub Personal Access Token is **required** for fetching repository information
 
 ## 🤝 Contributing
 
