@@ -22,49 +22,28 @@ A comprehensive solution for crawling and displaying Godot Engine plugin library
 
 ```
 godot-plugin-crawler/
-├── backend/                    # Backend service (TypeScript/Node.js)
+├── backend/                   # Backend service (TypeScript/Node.js)
 │   ├── src/
 │   │   ├── crawler/           # Web crawler modules
-│   │   │   ├── crawlerOrchestrator.ts  # Main crawler controller
-│   │   │   ├── httpClient.ts           # HTTP client with retry logic
-│   │   │   ├── assetService.ts         # Asset processing service
-│   │   │   ├── sites/                   # Platform-specific crawlers
-│   │   │   │   ├── github.ts           # GitHub integration
-│   │   │   │   ├── gitlab.ts           # GitLab integration
-│   │   │   │   ├── codeberg.ts         # Codeberg integration
-│   │   │   │   └── site.ts             # Base interface
-│   │   │   └── index.ts                # Crawler entry point
 │   │   ├── server.ts          # Express server with API endpoints
 │   │   ├── database.ts        # SQLite database operations
-│   │   ├── config.ts          # Configuration management
-│   │   ├── types.ts           # TypeScript type definitions
-│   │   └── summarizer.ts      # AI summary service (OpenAI)
+│   │   └── types.ts           # TypeScript type definitions
 │   ├── data/                  # SQLite database files
-│   ├── package.json           # Backend dependencies
-│   └── tsconfig.json          # TypeScript configuration
+│   ├── package.json
+│   └── tsconfig.json
 ├── frontend/                  # Frontend application (Vue 3/Vite)
 │   ├── src/
-│   │   ├── components/        # Vue components
-│   │   │   ├── FilterSidebar.vue      # Advanced filtering UI
-│   │   │   ├── LanguageSwitcher.vue   # Language switcher
-│   │   │   ├── Pagination.vue         # Pagination component
-│   │   │   ├── PluginCard.vue         # Individual plugin card
-│   │   │   ├── PluginGrid.vue         # Plugin grid layout
-│   │   │   └── PluginList.vue         # Main plugin list
+│   │   ├── components/        
 │   │   ├── services/          # API services
-│   │   │   └── api.ts                # API client
-│   │   ├── utils/             # Utility functions
-│   │   │   └── i18n.ts               # Internationalization
-│   │   ├── App.vue            # Root component
-│   │   ├── main.ts            # Application entry point
-│   │   └── style.css          # Global styles
-│   ├── public/                # Static assets
-│   ├── package.json           # Frontend dependencies
-│   └── vite.config.ts         # Vite configuration
+│   │   ├── App.vue
+│   │   └── main.ts
+│   ├── public/
+│   ├── package.json
+│   └── vite.config.ts
 ├── .env.example               # Environment variables template
-├── license                    # MIT License
-├── README.md                  # This file
-└── README_CN.md               # Chinese documentation
+├── license
+├── README.md
+└── README_CN.md
 ```
 
 ## ⚡ Quick Start

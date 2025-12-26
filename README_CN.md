@@ -22,49 +22,28 @@
 
 ```
 godot-plugin-crawler/
-├── backend/                    # 后端服务 (TypeScript/Node.js)
+├── backend/                   # 后端服务 (TypeScript/Node.js)
 │   ├── src/
 │   │   ├── crawler/           # 网络爬虫模块
-│   │   │   ├── crawlerOrchestrator.ts  # 主爬虫控制器
-│   │   │   ├── httpClient.ts           # 带重试逻辑的 HTTP 客户端
-│   │   │   ├── assetService.ts         # 插件处理服务
-│   │   │   ├── sites/                   # 平台特定爬虫
-│   │   │   │   ├── github.ts           # GitHub 集成
-│   │   │   │   ├── gitlab.ts           # GitLab 集成
-│   │   │   │   ├── codeberg.ts         # Codeberg 集成
-│   │   │   │   └── site.ts             # 基础接口
-│   │   │   └── index.ts                # 爬虫入口点
 │   │   ├── server.ts          # Express 服务器和 API 端点
 │   │   ├── database.ts        # SQLite 数据库操作
-│   │   ├── config.ts          # 配置管理
-│   │   ├── types.ts           # TypeScript 类型定义
-│   │   └── summarizer.ts      # AI 摘要服务 (OpenAI)
+│   │   └── types.ts           # TypeScript 类型定义
 │   ├── data/                  # SQLite 数据库文件
-│   ├── package.json           # 后端依赖
-│   └── tsconfig.json          # TypeScript 配置
+│   ├── package.json
+│   └── tsconfig.json
 ├── frontend/                  # 前端应用 (Vue 3/Vite)
 │   ├── src/
-│   │   ├── components/        # Vue 组件
-│   │   │   ├── FilterSidebar.vue      # 高级筛选界面
-│   │   │   ├── LanguageSwitcher.vue   # 语言切换器
-│   │   │   ├── Pagination.vue         # 分页组件
-│   │   │   ├── PluginCard.vue         # 单个插件卡片
-│   │   │   ├── PluginGrid.vue         # 插件网格布局
-│   │   │   └── PluginList.vue         # 主插件列表
+│   │   ├── components/        
 │   │   ├── services/          # API 服务
-│   │   │   └── api.ts                # API 客户端
-│   │   ├── utils/             # 工具函数
-│   │   │   └── i18n.ts               # 国际化
-│   │   ├── App.vue            # 根组件
-│   │   ├── main.ts            # 应用入口点
-│   │   └── style.css          # 全局样式
-│   ├── public/                # 静态资源
-│   ├── package.json           # 前端依赖
-│   └── vite.config.ts         # Vite 配置
+│   │   ├── App.vue
+│   │   └── main.ts
+│   ├── public/
+│   ├── package.json
+│   └── vite.config.ts
 ├── .env.example               # 环境变量模板
-├── license                    # MIT 许可证
-├── README.md                  # 英文文档
-└── README_CN.md               # 中文文档
+├── license
+├── README.md                  
+└── README_CN.md               
 ```
 
 ## 快速开始
