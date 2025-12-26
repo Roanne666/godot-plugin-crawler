@@ -3,7 +3,7 @@
     <button @click.stop="toggleFavorite" class="favorite-btn" :class="{ 'is-favorite': isFavorite }">
       <span class="star-icon">{{ isFavorite ? "★" : "☆" }}</span>
     </button>
-    <div v-if="isToday(plugin.createdAt)" class="new-badge">NEW</div>
+    <div v-if="isToday(plugin.createdAt)" class="new-badge">{{ t("new") }}</div>
     <a :href="plugin.repoUrl" target="_blank" class="asset-header">
       <img :src="plugin.iconUrl" :alt="plugin.title + '\'s icon'" class="media-object" width="80" height="80" />
       <div class="asset-title">
@@ -290,5 +290,9 @@ export default defineComponent({
   border-radius: 0 0 4px 0;
   z-index: 5;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+:lang(zh-cn) .new-badge {
+  font-size: 14px;
 }
 </style>

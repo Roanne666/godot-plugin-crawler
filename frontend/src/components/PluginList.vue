@@ -8,6 +8,7 @@
       v-model:filter-license="filterLicense"
       v-model:filter-support-level="filterSupportLevel"
       v-model:show-only-favorites="showOnlyFavorites"
+      v-model:show-only-new="showOnlyNew"
       :categories="categories"
       :versions="versions"
       :licenses="licenses"
@@ -53,6 +54,7 @@ export default defineComponent({
     const filterSupportLevel = ref("Any");
     const searchQuery = ref("");
     const showOnlyFavorites = ref(false);
+    const showOnlyNew = ref(false);
     const currentPage = ref(1);
 
     const categories = [
@@ -165,6 +167,10 @@ export default defineComponent({
         result = result.filter((p) => p.favorite === true);
       }
 
+      if (showOnlyNew.value) {
+        result = result.filter((p) => isToday(p.createdAt));
+      }
+
       // Sorting
       result = result.slice().sort((a, b) => {
         const key = sortKey.value;
@@ -201,18 +207,27 @@ export default defineComponent({
     });
 
     watch(
-      [sortKey, filterGodotVersion, filterCategory, filterLicense, filterSupportLevel, searchQuery, showOnlyFavorites],
+      [
+        sortKey,
+        filterGodotVersion,
+        filterCategory,
+        filterLicense,
+        filterSupportLevel,
+        searchQuery,
+        showOnlyFavorites,
+        showOnlyNew,
+      ],
       () => {
         currentPage.value = 1;
       }
     );
 
     watch(currentPage, () => {
-      const mainContent = document.querySelector('.main-content');
+      const mainContent = document.querySelector(".main-content");
       if (mainContent) {
         mainContent.scrollTop = 0;
       }
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
     const isFavorite = (pluginUrl: string) => {
@@ -241,7 +256,7 @@ export default defineComponent({
         if (!plugin) return;
 
         const updatedPlugin = await assetApi.refreshPlugin(pluginUrl);
-        
+
         const index = plugins.value.findIndex((p) => p.url === pluginUrl);
         if (index !== -1) {
           plugins.value[index] = { ...updatedPlugin, favorite: plugin.favorite };
@@ -251,17 +266,28 @@ export default defineComponent({
       }
     };
 
+    const isToday = (dateString?: string) => {
+      if (!dateString) return false;
+      const createdDate = new Date(dateString);
+      const today = new Date();
+      return createdDate.toDateString() === today.toDateString();
+    };
+
     const localizeSupportLevel = (level: string) => {
       switch (level.toLowerCase()) {
-        case 'testing': return t('testing');
-        case 'community': return t('community');
-        case 'featured': return t('featured');
-        default: return level;
+        case "testing":
+          return t("testing");
+        case "community":
+          return t("community");
+        case "featured":
+          return t("featured");
+        default:
+          return level;
       }
     };
 
     const localizeCategory = (category: string) => {
-      if (category === 'Any') return t('any');
+      if (category === "Any") return t("any");
       return category;
     };
 
@@ -275,6 +301,7 @@ export default defineComponent({
       filterSupportLevel,
       searchQuery,
       showOnlyFavorites,
+      showOnlyNew,
       filteredAndSortedPlugins,
       categories,
       versions,
@@ -285,6 +312,7 @@ export default defineComponent({
       isFavorite,
       toggleFavorite,
       refreshPlugin,
+      isToday,
       localizeSupportLevel,
       localizeCategory,
     };

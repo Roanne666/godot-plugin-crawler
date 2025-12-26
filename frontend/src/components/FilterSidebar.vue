@@ -38,6 +38,12 @@
           {{ t('show_only_favorites') }}
         </label>
       </div>
+      <div class="new-filter">
+        <label>
+          <input type="checkbox" :checked="showOnlyNew" @change="handleNewChange" />
+          {{ t('show_only_new') }}
+        </label>
+      </div>
     </div>
   </div>
 </template>
@@ -56,6 +62,7 @@ export default defineComponent({
     filterLicense: { type: String, required: true },
     filterSupportLevel: { type: String, required: true },
     showOnlyFavorites: { type: Boolean, required: true },
+    showOnlyNew: { type: Boolean, required: true },
     categories: { type: Array as PropType<string[]>, required: true },
     versions: { type: Array as PropType<string[]>, required: true },
     licenses: { type: Array as PropType<string[]>, required: true },
@@ -69,6 +76,7 @@ export default defineComponent({
     "update:filterLicense",
     "update:filterSupportLevel",
     "update:showOnlyFavorites",
+    "update:showOnlyNew",
   ],
   setup(_, { emit }) {
     const { t } = useI18n();
@@ -107,6 +115,11 @@ export default defineComponent({
       emit("update:showOnlyFavorites", target.checked);
     };
 
+    const handleNewChange = (event: Event) => {
+      const target = event.target as HTMLInputElement;
+      emit("update:showOnlyNew", target.checked);
+    };
+
     return {
       t,
       handleSearchInput,
@@ -116,6 +129,7 @@ export default defineComponent({
       handleLicenseChange,
       handleSupportLevelChange,
       handleFavoriteChange,
+      handleNewChange,
     };
   },
 });
@@ -184,6 +198,24 @@ select {
 }
 
 .favorite-filter input[type="checkbox"] {
+  margin-right: 8px;
+  width: auto;
+  margin-bottom: 3px;
+  vertical-align: middle;
+}
+
+.new-filter {
+  margin-top: 10px;
+}
+
+.new-filter label {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.new-filter input[type="checkbox"] {
   margin-right: 8px;
   width: auto;
   margin-bottom: 3px;
