@@ -1,6 +1,6 @@
 import axios from "axios";
 import { HttpsProxyAgent } from "https-proxy-agent";
-import { PROXY, GITHUB_USER_AGENT, GITHUB_TOKEN, GITLAB_USER_AGENT, GITLAB_TOKEN, MAX_RETRIES, RETRY_DELAY_BASE } from "../config";
+import { PROXY, GITHUB_USER_AGENT, GITHUB_TOKEN, GITLAB_TOKEN, MAX_RETRIES, RETRY_DELAY_BASE } from "../config";
 
 function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -80,5 +80,3 @@ export async function fetchWithRetry<T>(url: string, options?: FetchOptions): Pr
   console.error(`Error fetching ${url}:`, lastError);
   return undefined;
 }
-
-export { client as httpClient };
