@@ -21,25 +21,7 @@
 import { defineComponent, type PropType } from "vue";
 import PluginCard from "./PluginCard.vue";
 import { useI18n } from "../utils/i18n";
-
-interface Asset {
-  title: string;
-  url: string;
-  author: string;
-  authorUrl: string;
-  version: string;
-  lastUpdated: string;
-  category: string;
-  godotVersion: string;
-  supportLevel: string;
-  license: string;
-  iconUrl: string;
-  repoUrl: string;
-  repoContent: string;
-  summary: string;
-  stars: number;
-  lastCommit: string;
-}
+import type { Asset } from "../services/api";
 
 export default defineComponent({
   name: "PluginGrid",
