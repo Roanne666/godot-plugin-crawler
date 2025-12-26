@@ -26,6 +26,8 @@ export interface Asset {
   summary: string;
   stars: number;
   lastCommit: string;
+  crawledAt?: string;
+  createdAt?: string;
   favorite?: boolean;
 }
 

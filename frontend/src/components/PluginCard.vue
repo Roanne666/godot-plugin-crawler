@@ -3,6 +3,7 @@
     <button @click.stop="toggleFavorite" class="favorite-btn" :class="{ 'is-favorite': isFavorite }">
       <span class="star-icon">{{ isFavorite ? "★" : "☆" }}</span>
     </button>
+    <div v-if="isToday(plugin.createdAt)" class="new-badge">NEW</div>
     <a :href="plugin.repoUrl" target="_blank" class="asset-header">
       <img :src="plugin.iconUrl" :alt="plugin.title + '\'s icon'" class="media-object" width="80" height="80" />
       <div class="asset-title">
@@ -63,6 +64,12 @@ export default defineComponent({
     formatDate(dateString: string) {
       const date = new Date(dateString);
       return date.toLocaleDateString("en-CA");
+    },
+    isToday(dateString?: string) {
+      if (!dateString) return false;
+      const createdDate = new Date(dateString);
+      const today = new Date();
+      return createdDate.toDateString() === today.toDateString();
     },
     getSupportLevelClass(supportLevel: string) {
       switch (supportLevel) {
@@ -269,5 +276,19 @@ export default defineComponent({
   font-size: 14px;
   color: #666;
   transition: transform 0.2s ease;
+}
+
+.new-badge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #ff4757;
+  color: white;
+  font-size: 10px;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 0 0 4px 0;
+  z-index: 5;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 </style>

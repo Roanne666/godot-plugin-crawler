@@ -164,6 +164,7 @@ function mapRowToAsset(row: any): Asset {
     stars: row.stars,
     lastCommit: row.lastCommit,
     crawledAt: row.crawledAt,
+    createdAt: row.created_at,
     favorite: Boolean(row.favorite),
   };
 }
